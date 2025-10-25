@@ -3,10 +3,10 @@ const prisma = new PrismaClient();
 
 //here we just write functions to avoid writing the routes and fucntions in the same folder
 async function register(req, res) {
-    const { name, email, password } = req.body;
+    const { username, email, password } = req.body;
     const user = await prisma.user.create({
         data: {
-            name,
+            username,
             email,
             password
         }
