@@ -16,25 +16,3 @@ model User {
   password String
   role     Role   @default(admin)
 }
-
-model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  price       BigInt
-  description String
-  category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  Int
-}
-
-model Category {
-  id       Int       @id @default(autoincrement())
-  name     String
-  products Product[]
-}
-
-enum Role {
-  admin
-  user
-  client
-  farmer
-}

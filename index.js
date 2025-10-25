@@ -1,24 +1,16 @@
-const express = require('express');
-const userRouter = require('./routes/userRouter');
-const categoryRouter = require('./routes/categoryRouter');
-const productRouter = require('./routes/productRouter');
+import express, { json } from 'express';
+import { register, getUsers, login } from './controllers/userController.js';
+
 const server = express();
 const PORT = 1339;
 
+// Middleware should be set up before routes
+server.use(json());
 
-//middleware (check the request and redirect the request)
-//im middlewares we use "use" to redirect the request
-server.use("/api/v1/users", userRouter)
-server.use("/api/v1/products", productRouter)
-server.use("/api/v1/categories",categoryRouter)
-
-
-
-server.get('/api/v1', (req, res) => {
-  res.send('Hello World');
-});
-
-
+// Use appropriate HTTP methods for routes
+server.post("/users/register", register);
+server.post("/users/login", login);
+server.get("/users", getUsers); // Added getUsers route
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
